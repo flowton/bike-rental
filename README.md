@@ -5,4 +5,83 @@ Project on bike rental in Gothenburg (Styr &amp; Ställ)
 
 * test 2
 
-# Something else in main
+# Additional feature
+
+* An additional feature should contain x
+
+
+
+
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second editA lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second editA lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second editA lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second editA lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second editA lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second editA lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second editA lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second editA lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second editA lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second editA lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+A lot of additional info have been added here as well in the second edit
+>>>>>>> c36a662926f0f6aa552ec35cf2f9f99d8804eb32
