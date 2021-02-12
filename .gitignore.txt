@@ -1,3 +1,5 @@
 .ipynb_checkpoints
+**/*.ipynb_checkpoints/
 bike-rental-gbg-setpoints-stations
 bike-rental-gbg-travel-2020
+ignore.txt
