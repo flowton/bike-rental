@@ -26,6 +26,22 @@ st.markdown("""
 
 
 
+import requests
+from streamlit_lottie import st_lottie
+
+print(st_lottie.__file__)
+print(st.__file__)
+
+def load_lottieurl(url: str):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+lottie_url = "https://assets5.lottiefiles.com/packages/lf20_V9t630.json"
+lottie_json = load_lottieurl(lottie_url)
+
+
 #-------Import df-----------
 df = pd.read_excel('bike-rental-gbg-travel-2020.xlsx')
 #df = pd.read_csv('bike-rental-gbg-travel-2020.csv', encoding = 'latin-1')
