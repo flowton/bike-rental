@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import seaborn as sns
+import pydeck as pdk
 from sklearn.cluster import KMeans
 #from matplotlib_venn import venn2, venn2_circles
 import matplotlib.pyplot as plt
-
 
 st.markdown("""
 # What is Data Science?
@@ -17,6 +17,7 @@ st.markdown("""
 > What stations exist for bike rental in Gothenburg? Are they all used the same?
 """)
 
+
 st.markdown("""
 ### 2. :keycap_ten: **Prepare the data**
 > What stations exist for bike rental in Gothenburg? Are they all used the same?
@@ -24,34 +25,22 @@ st.markdown("""
 * => Goal is to have data per **station** instead
 """)
 
-
-
-import requests
-from streamlit_lottie import st_lottie
-
-print(st_lottie.__file__)
-print(st.__file__)
-
-def load_lottieurl(url: str):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
-
-lottie_url = "https://assets5.lottiefiles.com/packages/lf20_V9t630.json"
-lottie_json = load_lottieurl(lottie_url)
-
-
 #-------Import df-----------
-df = pd.read_excel('bike-rental-gbg-travel-2020.xlsx')
-#df = pd.read_csv('bike-rental-gbg-travel-2020.csv', encoding = 'latin-1')
-df = df.rename(columns = {"Start time": "start_time", "End time": "end_time", "Duration" : "duration",
+@st.cache(suppress_st_warning=True)
+def read_data():
+    gif_runner = st.image('loading.gif')
+    df = pd.read_excel('bike-rental-gbg-travel-2020.xlsx')
+    #df = pd.read_csv('bike-rental-gbg-travel-2020.csv', encoding = 'latin-1')
+    df = df.rename(columns = {"Start time": "start_time", "End time": "end_time", "Duration" : "duration",
                               "Start station number" : "start_station_num", "Rental place" : "start_station_name",
                               "End station number" : "end_station_num", "Return place" : "end_station_name",
                               "Bike number" : "bike_number"})
+    gif_runner.empty()
+    return df
 
-
+df = read_data()
 st.dataframe(df.head())
+
 ##------------Create DF plot------------
 
 df_plot = df.copy()
@@ -158,33 +147,100 @@ def find_station_label(data, model, k):
         labeldict[label].append(station)
     return labeldict
 
-
-
 run_ml = st.checkbox(
     'Run Machine Learning'
 )
 if run_ml:
-    k = 3
+    k = 4
     kmeans_input_data = grouped_data.drop(columns=['start_station_name', '0-6', '20-23'])
     kmeans_model = KMeans(n_clusters=k).fit(kmeans_input_data)  # Drop station as it's not a feature
+    st.write('Cluster centers: ')
+    st.write(kmeans_model.cluster_centers_)
+    st.write('Inertia: ')
+    st.write(kmeans_model.inertia_)
     t = find_station_label(grouped_data, kmeans_model, k)
-    st.write('Cluster centers is:' + '\n' + str(kmeans_model.cluster_centers_) +'\n\n' +
-             'Inertia is : ' + '\n' + str(kmeans_model.cluster_centers_))
+
 
 
 ##------------Visualizing the data--------------
-
-
 
 st.markdown("""
 ### 4. :bar_chart: **Visualize results**
 > How can we clearly communicate our findings?
 """)
 
-run_viz = st.checkbox(
-    'Run Visualization'
+run_map_viz = st.checkbox(
+    'Run map visualization'
 )
-if run_viz:
+if run_map_viz:
+    aug_stations = pd.read_excel('bike-rental-gbg-setpoints-stations - augmented with coordinates.xlsx')
+
+    coordinates_per_cluster = []
+    for key in t:
+        lat = []
+        lon = []
+        for i in range(len(t[key])):
+            temporary = aug_stations[aug_stations['Place name'] == t[key][i]].iloc[:, -2:]
+
+            lat.append(temporary.iloc[0, 0])
+            lon.append(temporary.iloc[0, 1])
+
+        station_coordinates = {'name': t[key], 'lat': lat, 'lon': lon}
+        coordinates_per_cluster.append(station_coordinates)
+
+    def visualize_single_map(data, color='[240,30,70, 180]'):
+        st.pydeck_chart(pdk.Deck(
+            map_style='mapbox://styles/mapbox/light-v9',
+            initial_view_state=pdk.ViewState(
+                latitude=57.7068,
+                longitude=11.965,
+                zoom=11,
+                pitch=50,
+            ),
+            layers=[
+                pdk.Layer(
+                    'ScatterplotLayer',
+                    data=data,
+                    get_position='[lon, lat]',
+                    get_color=color,
+                    get_radius=100,
+                ),
+            ],
+        ))
+
+
+    def visualize_multiple_map(all_data, num_maps, color='[240,30,70, 180]'):
+        st.pydeck_chart(pdk.Deck(
+            map_style='mapbox://styles/mapbox/light-v9',
+            initial_view_state=pdk.ViewState(
+                latitude=57.7068,
+                longitude=11.965,
+                zoom=11,
+                pitch=50,
+            ),
+            layers=[
+                pdk.Layer(
+                    'ScatterplotLayer',
+                    data=data,
+                    get_position='[lon, lat]',
+                    get_color=color,
+                    get_radius=100,
+                ),
+            ],
+        ))
+
+    colors = ['[240,30,70, 180]', '[0,250,0, 180]', '[0,0,250, 180]', '[100,100,100, 180]', '[60,120,180, 180]']
+    for i, dict in enumerate(coordinates_per_cluster):
+        df_current_cluster = pd.DataFrame(dict)
+        st.write('Cluster: ' + str(i) + '\n')
+        st.write(df_current_cluster['name'])
+        visualize_single_map(df_current_cluster, colors[
+            i % len(colors)])  # Visualize map, enforce that color indice is within size of available colors.
+
+run_bar_viz = st.checkbox(
+    'Run bar Visualization'
+)
+if run_bar_viz:
     def stacked_bar_clustering_viz(labeldict, data,model_data, points_of_cutoff, cluster_centers, max_results = 1000):
         def find_stacked_bottom(n, row):
             bottom = 0
@@ -212,13 +268,4 @@ if run_viz:
             st.pyplot(plt.gcf())
 
 
-
-    #{:0.2f}
-
-
-
     stacked_bar_clustering_viz(t, grouped_data, kmeans_input_data, cutoff_points, kmeans_model.cluster_centers_)
-
-
-
-
